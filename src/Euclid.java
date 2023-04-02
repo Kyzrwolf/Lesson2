@@ -11,7 +11,7 @@ public class Euclid {
         System.out.println(getLCM(45, 25) == 225);
         System.out.println(getLCM(7,8) == 56);
         System.out.println(getLCM(Integer.MAX_VALUE, Integer.MAX_VALUE) == Integer.MAX_VALUE);
-
+        System.out.println(getLCM(Integer.MAX_VALUE,Integer.MAX_VALUE - 1));
     }
 
     private static int getGCD(int a, int b) {
@@ -31,9 +31,11 @@ public class Euclid {
         return a;
     }
 
-    private static int getLCM(int a, int b) {
-        long lcm = ((long) a / getGCD(a, b)) * b;
-        return (int) lcm;
+    private static long getLCM(int a, int b) {
+        // если кастовать инты к доп. переменным long, перед арифметическими операциями
+        // idea начинает ругаться: "casting to long is redundant".
+        // сделал вот так, результат точно такой же и выглядит лаконичнее :)
+        return ( (long) a / (long) getGCD(a, b)) * (long) b;
     }
 
 }
